@@ -1,7 +1,14 @@
 var express = require("express");
-const { index } = require("../controller");
 var router = express.Router();
 
-router.get("/", index);
+// START DASHBOARD ===============================================
+const { index_dashboard } = require("../controller/dashboard");
+router.get("/", index_dashboard);
+// END DASHBOARD ===============================================
+
+// START CATEGORY ================================================
+const { index_category } = require("../controller/category");
+router.get("/category", index_category);
+// END CATEGORY ================================================
 
 module.exports = router;
