@@ -54,7 +54,7 @@
                     <div class="select2-purple">
                         <select class="form-control select2" multiple="multiple" style="width: 100%;" name="nominals" data-placeholder="Select nominals" required>
                           <% nominals.map(nominal=>{ %> 
-                            <option value="<%= nominal._id %>"><%= nominal.coinName %> | <%= nominal.price %></option>
+                            <option value="<%= nominal._id %>"><%= nominal.coinName %> | <%= nominal.coinQuantity %></option>
                           <% }) %> 
                         </select>
                     </div>

@@ -29,10 +29,12 @@ router.delete("/nominal/delete/:id", actionDeleteNominal);
 // END NOMINAL ==================================================
 
 // START VOUCHER ================================================
-const { indexVoucher, viewCreateVoucher, actionCreateVoucher } = require("../controller/voucher");
+const { indexVoucher, viewCreateVoucher, actionCreateVoucher, viewEditVoucher, actionEditVoucher } = require("../controller/voucher");
 router.get("/voucher", indexVoucher)
 router.get("/voucher/create", viewCreateVoucher)
 router.post("/voucher/create", multer({dest: os.tmpdir()}).single('image'), actionCreateVoucher)
+router.get("/voucher/edit/:id", viewEditVoucher)
+router.put("/voucher/edit/:id", multer({ dest: os.tmpdir() }).single("image"), actionEditVoucher);
 // END VOUCHER ==================================================
 
 // START NOMINAL ================================================
