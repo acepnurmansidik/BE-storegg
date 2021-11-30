@@ -7,10 +7,12 @@ router.get("/", index_dashboard);
 // END DASHBOARD ===============================================
 
 // START CATEGORY ================================================
-const { index_category, view_create, actionCreate } = require("../controller/category");
-router.get("/category", index_category);
-router.get("/category/create", view_create);
+const { actionCreate, viewCreate, indexCategory, viewEdit, actionEdit } = require("../controller/category");
+router.get("/category", indexCategory);
+router.get("/category/create", viewCreate);
 router.post("/category/create", actionCreate);
+router.get("/category/edit/:id", viewEdit);
+router.put("/category/edit/:id", actionEdit);
 // END CATEGORY ================================================
 
 module.exports = router;

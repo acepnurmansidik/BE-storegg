@@ -1,7 +1,7 @@
 const Category = require("../models/category");
 
 module.exports = {
-  index_category: async (req, res) => {
+  indexCategory: async (req, res) => {
     try {
       const category = await Category.find()
       res.render("admin/category/view_category",{
@@ -12,8 +12,7 @@ module.exports = {
       console.log(err.message);
     }
   },
-
-  view_create: async(req, res)=>{
+  viewCreate: async(req, res)=>{
     try {
       res.render("admin/category/create", {
         title: "Category | Create",
@@ -27,6 +26,32 @@ module.exports = {
       const { name } = req.body;
       let category = await Category({name})
       await category.save();
+      res.redirect("/category")
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  viewEdit: async(req, res)=>{
+    try {
+      const{id} = req.params
+
+      let category = await Category.findOne({_id:id})
+
+      res.render("admin/category/edit", {
+        title: "Category | Create",
+        category
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  actionEdit: async(req, res)=>{
+    try {
+      const {id}=req.params
+      const {name}=req.body
+
+      await Category.findOneAndUpdate({_id:id},{name})
+
       res.redirect("/category")
     } catch (err) {
       console.log(err)
