@@ -1,5 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const multer = require("multer")
+const os = require("os")
 
 // START DASHBOARD ===============================================
 const { index_dashboard } = require("../controller/dashboard");
@@ -24,6 +26,16 @@ router.post("/nominal/create", actionCreateNominal);
 router.get("/nominal/edit/:id", viewEditNominal);
 router.put("/nominal/edit/:id", actionEditNominal);
 router.delete("/nominal/delete/:id", actionDeleteNominal);
+// END NOMINAL ==================================================
+
+// START VOUCHER ================================================
+const { indexVoucher, viewCreateVoucher, actionCreateVoucher } = require("../controller/voucher");
+router.get("/voucher", indexVoucher)
+router.get("/voucher/create", viewCreateVoucher)
+router.post("/voucher/create", multer({dest: os.tmpdir()}).single('image'), actionCreateVoucher)
+// END VOUCHER ==================================================
+
+// START NOMINAL ================================================
 // END NOMINAL ==================================================
 
 // START NOMINAL ================================================
