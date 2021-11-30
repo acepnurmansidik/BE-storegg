@@ -1,17 +1,30 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var methodOverride = require("method-override");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const methodOverride = require("method-override");
+const session = require("express-session");
+const flash = require("connect-flash");
 
-var indexRouter = require("./src/route/index");
+const indexRouter = require("./src/route/index");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+// notif
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+  })
+);
+app.use(flash());
 
 app.use(methodOverride("_method"));
 app.use(logger("dev"));
