@@ -11,8 +11,11 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-
-      const voucher = await Voucher.find();
+        
+      // read data voucher wuth category & nominals
+      const voucher = await Voucher.find()
+      .populate("category")
+      .populate("nominals");
 
       res.render("admin/voucher/view_voucher", {
         title: "Voucher page",

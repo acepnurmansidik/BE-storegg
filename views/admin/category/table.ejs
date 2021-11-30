@@ -13,8 +13,8 @@
         <td><%= category[i].name %> </td>
         <td>
           <form action="/category/delete/<%= category[i]._id %>?_method=DELETE" method="POST">
-            <a class="btn btn-warning" href="/category/edit/<%= category[i]._id %>"><i class="fas fa-pencil-alt"></i> Edit</a>
-            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+            <a class="btn btn-warning btn-sm" href="/category/edit/<%= category[i]._id %>"><i class="fas fa-pencil-alt"></i> Edit</a>
+            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
           </form>
         </td>
       </tr>
