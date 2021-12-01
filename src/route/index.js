@@ -39,7 +39,7 @@ router.delete("/voucher/delete/:id", actionDeleteVoucher)
 router.put("/voucher/status/:id", actionStatus)
 // END VOUCHER ==================================================
 
-// START BANK ================================================
+// START BANK ===================================================
 const { indexBank, viewCreateBank, actionCreateBank, viewEditBank, actionEditBank, actionDeleteBank } = require("../controller/bank");
 router.get("/bank", indexBank)
 router.get("/bank/create", viewCreateBank)
@@ -47,7 +47,14 @@ router.post("/bank/create", actionCreateBank)
 router.get("/bank/edit/:id", viewEditBank);
 router.put("/bank/edit/:id", actionEditBank);
 router.delete("/bank/delete/:id", actionDeleteBank);
-// END BANK ==================================================
+// END BANK =====================================================
+
+// START PAYMENT ================================================
+const { indexPayment, viewCreatePayment, actionCreatePayment } = require("../controller/payment");
+router.get("/payment", indexPayment)
+router.get("/payment/create", viewCreatePayment)
+router.post("/payment/create", actionCreatePayment)
+// END PAYMENT ==================================================
 
 // START NOMINAL ================================================
 // END NOMINAL ==================================================
