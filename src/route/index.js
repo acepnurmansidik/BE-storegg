@@ -3,12 +3,23 @@ const router = express.Router();
 const multer = require("multer")
 const os = require("os")
 
-// START DASHBOARD ===============================================
+// START USERS =====================================================
+const { viewSignIn, actionSignin } = require("../controller/user");
+router.get("/", viewSignIn)
+router.post("/", actionSignin)
+// END USERS =======================================================
+
+// START MIDDLEWARE ================================================
+const { isLogin } = require("../middleware/auth");
+router.use(isLogin)
+// END MIDDLEWARE ==================================================
+
+// START DASHBOARD =================================================
 const { index_dashboard } = require("../controller/dashboard");
 router.get("/dashboard", index_dashboard);
-// END DASHBOARD =================================================
+// END DASHBOARD ===================================================
 
-// START CATEGORY ================================================
+// START CATEGORY ==================================================
 const { actionCreate, viewCreate, indexCategory, viewEdit, actionEdit, actionDelete } = require("../controller/category");
 router.get("/category", indexCategory);
 router.get("/category/create", viewCreate);
@@ -16,9 +27,9 @@ router.post("/category/create", actionCreate);
 router.get("/category/edit/:id", viewEdit);
 router.put("/category/edit/:id", actionEdit);
 router.delete("/category/delete/:id", actionDelete);
-// END CATEGORY =================================================
+// END CATEGORY ====================================================
 
-// START NOMINAL ================================================
+// START NOMINAL ===================================================
 const { indexNominal, viewCreateNominal, actionCreateNominal, viewEditNominal, actionEditNominal, actionDeleteNominal } = require("../controller/nominal");
 router.get("/nominal", indexNominal)
 router.get("/nominal/create", viewCreateNominal);
@@ -26,9 +37,9 @@ router.post("/nominal/create", actionCreateNominal);
 router.get("/nominal/edit/:id", viewEditNominal);
 router.put("/nominal/edit/:id", actionEditNominal);
 router.delete("/nominal/delete/:id", actionDeleteNominal);
-// END NOMINAL ==================================================
+// END NOMINAL =======================================================
 
-// START VOUCHER ================================================
+// START VOUCHER =====================================================
 const { indexVoucher, viewCreateVoucher, actionCreateVoucher, viewEditVoucher, actionEditVoucher, actionDeleteVoucher, actionStatus } = require("../controller/voucher");
 router.get("/voucher", indexVoucher)
 router.get("/voucher/create", viewCreateVoucher)
@@ -37,9 +48,9 @@ router.get("/voucher/edit/:id", viewEditVoucher)
 router.put("/voucher/edit/:id", multer({ dest: os.tmpdir() }).single("image"), actionEditVoucher);
 router.delete("/voucher/delete/:id", actionDeleteVoucher)
 router.put("/voucher/status/:id", actionStatus)
-// END VOUCHER ==================================================
+// END VOUCHER =======================================================
 
-// START BANK ===================================================
+// START BANK ========================================================
 const { indexBank, viewCreateBank, actionCreateBank, viewEditBank, actionEditBank, actionDeleteBank } = require("../controller/bank");
 router.get("/bank", indexBank)
 router.get("/bank/create", viewCreateBank)
@@ -47,9 +58,9 @@ router.post("/bank/create", actionCreateBank)
 router.get("/bank/edit/:id", viewEditBank);
 router.put("/bank/edit/:id", actionEditBank);
 router.delete("/bank/delete/:id", actionDeleteBank);
-// END BANK =====================================================
+// END BANK ==========================================================
 
-// START PAYMENT ================================================
+// START PAYMENT =====================================================
 const { indexPayment, viewCreatePayment, actionCreatePayment, viewEditPayment, actionEditPayment, actionDeletePayment, actionStatusPayment } = require("../controller/payment");
 router.get("/payment", indexPayment)
 router.get("/payment/create", viewCreatePayment)
@@ -58,13 +69,8 @@ router.get("/payment/edit/:id", viewEditPayment)
 router.put("/payment/edit/:id", actionEditPayment)
 router.delete("/payment/delete/:id", actionDeletePayment);
 router.put("/payment/status/:id", actionStatusPayment);
-// END PAYMENT ==================================================
+// END PAYMENT =======================================================
 
-// START USERS ================================================
-const { viewSignIn } = require("../controller/user");
-router.get("/", viewSignIn)
-// END USERS ==================================================
-
-// START NOMINAL ================================================
-// END NOMINAL ==================================================
+// START NOMINAL =====================================================
+// END NOMINAL =======================================================
 module.exports = router;
