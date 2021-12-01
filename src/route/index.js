@@ -5,7 +5,7 @@ const os = require("os")
 
 // START DASHBOARD ===============================================
 const { index_dashboard } = require("../controller/dashboard");
-router.get("/", index_dashboard);
+router.get("/dashboard", index_dashboard);
 // END DASHBOARD =================================================
 
 // START CATEGORY ================================================
@@ -59,6 +59,11 @@ router.put("/payment/edit/:id", actionEditPayment)
 router.delete("/payment/delete/:id", actionDeletePayment);
 router.put("/payment/status/:id", actionStatusPayment);
 // END PAYMENT ==================================================
+
+// START USERS ================================================
+const { viewSignIn } = require("../controller/user");
+router.get("/", viewSignIn)
+// END USERS ==================================================
 
 // START NOMINAL ================================================
 // END NOMINAL ==================================================
