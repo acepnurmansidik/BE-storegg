@@ -72,6 +72,8 @@ router.delete("/payment/delete/:id", actionDeletePayment);
 router.put("/payment/status/:id", actionStatusPayment);
 // END PAYMENT =======================================================
 
-// START NOMINAL =====================================================
-// END NOMINAL =======================================================
+// START TRANSACTION ===============================================
+const { index_Transaction } = require("../controller/transaction");
+router.get("/transaction", index_Transaction);
+// END TRANSACTION =================================================
 module.exports = router;
