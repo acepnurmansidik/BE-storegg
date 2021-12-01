@@ -11,6 +11,7 @@ module.exports = {
 
       res.render("admin/bank/view_bank", {
         title: "Bank page",
+        name: req.session.user.name,
         alert,
         banks,
       });
@@ -24,6 +25,7 @@ module.exports = {
     try {
       res.render("admin/bank/create", {
         title: "Bank | Create",
+        name: req.session.user.name,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -54,6 +56,7 @@ module.exports = {
 
       res.render("admin/bank/edit", {
         title: "Bank | Edit",
+        name: req.session.user.name,
         bank,
       });
     } catch (err) {

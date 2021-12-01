@@ -19,6 +19,7 @@ module.exports = {
 
       res.render("admin/voucher/view_voucher", {
         title: "Voucher page",
+        name: req.session.user.name,
         alert,
         voucher,
       });
@@ -35,6 +36,7 @@ module.exports = {
 
       res.render("admin/voucher/create", {
         title: "Voucher page",
+        name: req.session.user.name,
         nominals,
         categories,
       });
@@ -118,6 +120,7 @@ module.exports = {
 
       res.render("admin/voucher/edit", {
         title: "Nominal | Edit",
+        name: req.session.user.name,
         voucher,
         nominals,
         categories,

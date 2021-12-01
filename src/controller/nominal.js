@@ -11,6 +11,7 @@ module.exports = {
 
       res.render("admin/nominal/view_nominal", {
         title: "Nominal page",
+        name: req.session.user.name,
         alert,
         nominal,
       });
@@ -24,6 +25,7 @@ module.exports = {
     try {
       res.render("admin/nominal/create", {
         title: "Nominal | Create",
+        name: req.session.user.name,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -54,6 +56,7 @@ module.exports = {
 
       res.render("admin/nominal/edit", {
         title: "Nominal | Edit",
+        name: req.session.user.name,
         nominal,
       });
     } catch (err) {

@@ -4,9 +4,10 @@ const multer = require("multer")
 const os = require("os")
 
 // START USERS =====================================================
-const { viewSignIn, actionSignin } = require("../controller/user");
+const { viewSignIn, actionSignin, actionSignout } = require("../controller/user");
 router.get("/", viewSignIn)
 router.post("/", actionSignin)
+router.get("/signout", actionSignout);
 // END USERS =======================================================
 
 // START MIDDLEWARE ================================================

@@ -12,6 +12,7 @@ module.exports = {
 
       res.render("admin/payment/view_payment", {
         title: "Payment page",
+        name: req.session.user.name,
         alert,
         payment,
       });
@@ -27,6 +28,7 @@ module.exports = {
 
       res.render("admin/payment/create", {
         title: "Payment | Create",
+        name: req.session.user.name,
         banks,
       });
     } catch (err) {
@@ -60,6 +62,7 @@ module.exports = {
 
       res.render("admin/payment/edit", {
         title: "Payment | Edit",
+        name: req.session.user.name,
         payment,
         banks,
       });

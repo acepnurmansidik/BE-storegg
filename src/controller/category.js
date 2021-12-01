@@ -10,6 +10,7 @@ module.exports = {
       const category = await Category.find();
       res.render("admin/category/view_category", {
         title: "Category page",
+        name: req.session.user.name,
         alert,
         category,
       });
@@ -23,6 +24,7 @@ module.exports = {
     try {
       res.render("admin/category/create", {
         title: "Category | Create",
+        name: req.session.user.name,
       });
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
@@ -54,6 +56,7 @@ module.exports = {
 
       res.render("admin/category/edit", {
         title: "Category | Edit",
+        name: req.session.user.name,
         category,
       });
     } catch (err) {
