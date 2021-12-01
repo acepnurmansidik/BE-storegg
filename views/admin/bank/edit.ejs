@@ -1,0 +1,124 @@
+<%- include ../../partials/header.ejs %> 
+<%- include ../../partials/navbar.ejs %> 
+<%- include ../../partials/sidebar.ejs %> 
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Bank</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/bank">Bank</a></li>
+              <li class="breadcrumb-item active">Create</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Form create bank</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/bank/edit/<%= bank._id %>?_method=PUT" method="POST">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="name">Owners name</label>
+                      <input type="text" value="<%= bank.name %>" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter owners name" required >
+                    </div>
+                    <div class="form-group">
+                      <label for="nameBank">Bank name</label>
+                      <select class="form-control select2" style="width: 100%;" name="nameBank" required>
+                        <option selected="selected">-- Select Bank --</option>
+                        <option value="BRI"
+                        <% if(bank.nameBank === "BRI"){ %>
+                            selected
+                        <% } %> 
+                        >BRI | 002</option>
+                        <option value="MANDIRI"
+                        <% if(bank.nameBank === "MANDIRI"){ %>
+                            selected
+                        <% } %> 
+                        >MANDIRI | 008</option>
+                        <option value="BNI"
+                        <% if(bank.nameBank === "BNI"){ %>
+                            selected
+                        <% } %> 
+                        >BNI | 009</option>
+                        <option value="BTN"
+                        <% if(bank.nameBank === "BTN"){ %>
+                            selected
+                        <% } %> 
+                        >BTN | 200</option>
+                        <option value="Danamon"
+                        <% if(bank.nameBank === "Danamon"){ %>
+                            selected
+                        <% } %> 
+                        >Danamon | 011</option>
+                        <option value="BankPermata"
+                        <% if(bank.nameBank === "BankPermata"){ %>
+                            selected
+                        <% } %> 
+                        >Bank Permata | 013</option>
+                        <option value="BCA"
+                        <% if(bank.nameBank === "BCA"){ %>
+                            selected
+                        <% } %> 
+                        >BCA | 014</option>
+                        <option value="Maybank"
+                        <% if(bank.nameBank === "Maybank"){ %>
+                            selected
+                        <% } %> 
+                        >Maybank | 016</option>
+                        <option value="PaninBank"
+                        <% if(bank.nameBank === "PaninBank"){ %>
+                            selected
+                        <% } %> 
+                        >Panin Bank | 019</option>
+                        <option value="UOB"
+                        <% if(bank.nameBank === "UOB"){ %>
+                            selected
+                        <% } %> 
+                        >UOB | 023</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="noRekening">Account number</label>
+                      <input type="text" value="<%= bank.noRekening %>" name="noRekening" class="form-control" id="exampleInputEmail1" placeholder="Enter account number" required >
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.col -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<%- include ../../partials/footer.ejs %> 
+<%- include ../../partials/js.ejs %> 

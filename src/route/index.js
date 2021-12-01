@@ -39,8 +39,15 @@ router.delete("/voucher/delete/:id", actionDeleteVoucher)
 router.put("/voucher/status/:id", actionStatus)
 // END VOUCHER ==================================================
 
-// START NOMINAL ================================================
-// END NOMINAL ==================================================
+// START BANK ================================================
+const { indexBank, viewCreateBank, actionCreateBank, viewEditBank, actionEditBank, actionDeleteBank } = require("../controller/bank");
+router.get("/bank", indexBank)
+router.get("/bank/create", viewCreateBank)
+router.post("/bank/create", actionCreateBank)
+router.get("/bank/edit/:id", viewEditBank);
+router.put("/bank/edit/:id", actionEditBank);
+router.delete("/bank/delete/:id", actionDeleteBank);
+// END BANK ==================================================
 
 // START NOMINAL ================================================
 // END NOMINAL ==================================================

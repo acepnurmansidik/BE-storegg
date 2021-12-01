@@ -1,0 +1,84 @@
+<%- include ../../partials/header.ejs %> 
+<%- include ../../partials/navbar.ejs %> 
+<%- include ../../partials/sidebar.ejs %> 
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Bank</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/bank">Bank</a></li>
+              <li class="breadcrumb-item active">Create</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Form create bank</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/bank/create" method="POST">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="name">Owners name</label>
+                      <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter owners name" required >
+                    </div>
+                    <div class="form-group">
+                      <label for="nameBank">Bank name</label>
+                      <select class="form-control select2" style="width: 100%;" name="nameBank" required>
+                        <option selected="selected">-- Select Bank --</option>
+                        <option value="BRI">BRI | 002</option>
+                        <option value="MANDIRI">MANDIRI | 008</option>
+                        <option value="BNI">BNI | 009</option>
+                        <option value="BTN">BTN | 200</option>
+                        <option value="Danamon">Danamon | 011</option>
+                        <option value="BankPermata">Bank Permata | 013</option>
+                        <option value="BCA">BCA | 014</option>
+                        <option value="Maybank">Maybank | 016</option>
+                        <option value="PaninBank">Panin Bank | 019</option>
+                        <option value="UOB">UOB | 023</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="noRekening">Account number</label>
+                      <input type="text" name="noRekening" class="form-control" id="exampleInputEmail1" placeholder="Enter account number" required >
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.col -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<%- include ../../partials/footer.ejs %> 
+<%- include ../../partials/js.ejs %> 
