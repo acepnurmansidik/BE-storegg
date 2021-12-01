@@ -73,7 +73,8 @@ router.put("/payment/status/:id", actionStatusPayment);
 // END PAYMENT =======================================================
 
 // START TRANSACTION ===============================================
-const { index_Transaction } = require("../controller/transaction");
+const { index_Transaction, actionStatusTransaction } = require("../controller/transaction");
 router.get("/transaction", index_Transaction);
+router.put("/transaction/status/:id", actionStatusTransaction);
 // END TRANSACTION =================================================
 module.exports = router;
