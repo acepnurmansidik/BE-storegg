@@ -7,7 +7,7 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-      
+
       if (req.session.user === null || req.session.user === undefined) {
         res.render("admin/users/view_signin", {
           title: "Signin page",
@@ -28,7 +28,6 @@ module.exports = {
       const userExist = await User.findOne({ email });
 
       if (userExist) {
-        console.log("OKE");
         if (userExist.status === "Y") {
           const isMatchPass = await bcrypt.compare(
             password,
@@ -63,8 +62,8 @@ module.exports = {
       res.redirect("/");
     }
   },
-  actionSignout: async(req, res)=>{
-    req.session.destroy()
-    res.redirect("/")
-  }
+  actionSignout: async (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+  },
 };

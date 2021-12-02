@@ -2,11 +2,11 @@
     <thead>
     <tr>
       <th>No.</th>
-      <th>Nama game</th>
+      <th>Game name</th>
       <th>Item</th>
-      <th>Total harga</th>
+      <th>Total price</th>
       <th>Status</th>
-      <th>Nama player</th>
+      <th>Player name</th>
       <th>Action</th>
     </tr>
     </thead>
@@ -42,11 +42,12 @@
           <td><%= transaction[i]?.player?.name ?? '-' %></td>
           <td>
             <form style="display: inline-block;" action="/transaction/status/<%= transaction[i]._id %>?status=failed&_method=PUT" method="POST" >
-              <button class="btn btn-danger"><i class="fas fa-ban"></i> Reject</button>
+              <button class="btn btn-danger btn-sm"><i class="fas fa-ban"></i> Reject</button>
             </form>
             <form style="display: inline-block;" action="/transaction/status/<%= transaction[i]._id %>?status=success&_method=PUT" method="POST" >
-              <button class="btn btn-success"><i class="fas fa-check-circle"></i> Accept</button>
+              <button class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Accept</button>
             </form>
+            <a class="btn btn-warning btn-sm" href="/transaction/detail/<%= transaction[i]._id %>" ><i class="fas fa-info-circle"></i> Detail</a>
           </td>
         </tr>
       <% } %>  

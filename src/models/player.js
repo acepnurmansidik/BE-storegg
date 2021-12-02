@@ -45,8 +45,7 @@ let playerSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
-  },
-  { timestamps: true }
+  }
 );
 
 module.exports = mongoose.model("Player", playerSchema);

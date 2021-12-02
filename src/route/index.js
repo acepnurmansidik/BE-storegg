@@ -72,9 +72,16 @@ router.delete("/payment/delete/:id", actionDeletePayment);
 router.put("/payment/status/:id", actionStatusPayment);
 // END PAYMENT =======================================================
 
-// START TRANSACTION ===============================================
-const { index_Transaction, actionStatusTransaction } = require("../controller/transaction");
+// START TRANSACTION =================================================
+const { index_Transaction, actionStatusTransaction, viewDetailTransaction } = require("../controller/transaction");
 router.get("/transaction", index_Transaction);
 router.put("/transaction/status/:id", actionStatusTransaction);
-// END TRANSACTION =================================================
+router.get("/transaction/detail/:id", viewDetailTransaction);
+// END TRANSACTION ===================================================
+
+// START PLAYER ================================================
+const { indexPlayer, viewDetailPlayer } = require("../controller/player");
+router.get("/player", indexPlayer);
+router.get("/player/detail/:id", viewDetailPlayer);
+// END PLAYER ==================================================
 module.exports = router;
