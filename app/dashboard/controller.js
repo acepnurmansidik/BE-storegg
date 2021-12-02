@@ -1,7 +1,7 @@
-const Transaction = require("../models/transaction");
-const Voucher = require("../models/voucher");
-const Category = require("../models/category");
-const Player = require("../models/category");
+const Transaction = require("../transaction/model");
+const Voucher = require("../voucher/model");
+const Category = require("../category/model");
+const Player = require("../player/model");
 
 module.exports = {
   index_dashboard: async (req, res) => {

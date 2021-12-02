@@ -7,9 +7,17 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 
-const indexRouter = require("./src/route/index");
+const userRouter = require("./app/users/router");
+const bankRouter = require("./app/bank/router")
+const categoryRouter = require("./app/category/router")
+const dashboardRouter = require("./app/dashboard/router")
+const nominalRouter = require("./app/nominal/router")
+const paymentsRouter = require("./app/payments/router")
+const transactionRouter = require("./app/transaction/router")
+const voucherRouter = require("./app/voucher/router")
 
 const app = express();
+const URL = `/api/v1`;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -37,7 +45,14 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/admin-lte"))
 );
 
-app.use(indexRouter);
+app.use(userRouter);
+app.use(bankRouter);
+app.use(categoryRouter);
+app.use(dashboardRouter);
+app.use(nominalRouter);
+app.use(paymentsRouter);
+app.use(transactionRouter);
+app.use(voucherRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

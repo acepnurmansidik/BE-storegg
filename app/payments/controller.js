@@ -1,5 +1,5 @@
-const Payment = require("../models/payment");
-const Bank = require("../models/bank");
+const Payment = require("./model");
+const Bank = require("../bank/model");
 
 module.exports = {
   indexPayment: async (req, res) => {

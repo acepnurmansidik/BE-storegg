@@ -1,5 +1,5 @@
-const User = require("../models/user");
-const Player = require("../models/player");
+const User = require("./model");
+const Player = require("../player/model");
 const bcrypt = require("bcryptjs");
 
 module.exports = {

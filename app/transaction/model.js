@@ -1,4 +1,4 @@
-const Player = require("../models/player");
+// const Player = require("../player/model")
 const mongoose = require("mongoose");
 
 let transactionSchema = mongoose.Schema(

@@ -1,4 +1,4 @@
-const Bank = require("../models/bank");
+const Bank = require("./model");
 
 module.exports = {
   indexBank: async (req, res) => {
@@ -70,10 +70,7 @@ module.exports = {
       const { id } = req.params;
       const { name, nameBank, noRekening } = req.body;
 
-      await Bank.findOneAndUpdate(
-        { _id: id },
-        { name, nameBank, noRekening }
-      );
+      await Bank.findOneAndUpdate({ _id: id }, { name, nameBank, noRekening });
 
       req.flash("alertMessage", `Bank edit successfully`);
       req.flash("alertStatus", `success`);

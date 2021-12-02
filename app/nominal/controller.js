@@ -1,4 +1,4 @@
-const Nominal = require("../models/nominal");
+const Nominal = require("./model");
 
 module.exports = {
   indexNominal: async (req, res) => {
