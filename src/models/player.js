@@ -1,3 +1,5 @@
+const Category = require("../models/category")
+
 const mongoose = require("mongoose");
 
 let playerSchema = mongoose.Schema(

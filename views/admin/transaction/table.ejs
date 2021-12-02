@@ -41,12 +41,14 @@
           </td>
           <td><%= transaction[i]?.player?.name ?? '-' %></td>
           <td>
-            <form style="display: inline-block;" action="/transaction/status/<%= transaction[i]._id %>?status=failed&_method=PUT" method="POST" >
-              <button class="btn btn-danger btn-sm"><i class="fas fa-ban"></i> Reject</button>
-            </form>
-            <form style="display: inline-block;" action="/transaction/status/<%= transaction[i]._id %>?status=success&_method=PUT" method="POST" >
-              <button class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Accept</button>
-            </form>
+            <% if(transaction[i].status === "pending"){ %> 
+              <form style="display: inline-block;" action="/transaction/status/<%= transaction[i]._id %>?status=failed&_method=PUT" method="POST" >
+                <button class="btn btn-danger btn-sm"><i class="fas fa-ban"></i> Reject</button>
+              </form>
+              <form style="display: inline-block;" action="/transaction/status/<%= transaction[i]._id %>?status=success&_method=PUT" method="POST" >
+                <button class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Accept</button>
+              </form>
+            <% } %> 
             <a class="btn btn-warning btn-sm" href="/transaction/detail/<%= transaction[i]._id %>" ><i class="fas fa-info-circle"></i> Detail</a>
           </td>
         </tr>

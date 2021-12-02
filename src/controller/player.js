@@ -1,42 +1,19 @@
-const Player = require("../models/player");
+const Voucher = require("../models/voucher");
 
 module.exports = {
-  indexPlayer: async (req, res) => {
+  landingPage: async (req, res) => {
     try {
-      const alertMessage = req.flash("alertMessage");
-      const alertStatus = req.flash("alertStatus");
-      const alert = { message: alertMessage, status: alertStatus };
+      // cari kategori di voucher
+      // select berfungsi untuk memilih data yang kita perlukan dari collection
+      const voucher = await Voucher.find()
+        .select("_id name status category thumbnail")
+        .populate("category");
 
-      const players = await Player.find();
-
-      res.render("admin/player/view_player", {
-        title: "Player page",
-        name: req.session.user.name,
-        alert,
-        players,
-      });
-    } catch (err) {
-      req.flash("alertMessage", `${err.message}`);
-      req.flash("alertStatus", `danger`);
-      res.redirect("/");
-    }
-  },
-  viewDetailPlayer: async (req, res) => {
-    try {
-      const { id } = req.params;
-
-      const player = await Player.findOne({ _id: id });
-      console.log(player);
-
-      res.render("admin/player/detail", {
-        title: "Detail player page",
-        name: req.session.user.name,
-        player,
-      });
-    } catch (err) {
-      req.flash("alertMessage", `${err.message}`);
-      req.flash("alertStatus", `danger`);
-      res.redirect("/");
+      res.status(200).json({ data: voucher });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message || `Internal server error` });
     }
   },
 };

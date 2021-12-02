@@ -3,8 +3,13 @@ const router = express.Router();
 const multer = require("multer")
 const os = require("os")
 
+const URL = `/api/v1`;
+
+const { landingPage } = require("../controller/player");
+router.get(`${URL}/players/landingpage`, landingPage);
+
 // START USERS =====================================================
-const { viewSignIn, actionSignin, actionSignout } = require("../controller/user");
+const { viewSignIn, actionSignin, actionSignout, indexPlayer, viewDetailPlayer } = require("../controller/user");
 router.get("/", viewSignIn)
 router.post("/", actionSignin)
 router.get("/signout", actionSignout);
@@ -80,7 +85,6 @@ router.get("/transaction/detail/:id", viewDetailTransaction);
 // END TRANSACTION ===================================================
 
 // START PLAYER ================================================
-const { indexPlayer, viewDetailPlayer } = require("../controller/player");
 router.get("/player", indexPlayer);
 router.get("/player/detail/:id", viewDetailPlayer);
 // END PLAYER ==================================================
