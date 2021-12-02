@@ -3,10 +3,12 @@ const router = express.Router();
 const multer = require("multer")
 const os = require("os")
 
-const URL = `/api/v1`;
-
-const { landingPage } = require("../controller/player");
-router.get(`${URL}/players/landingpage`, landingPage);
+// START PLAYERS [API] =====================================================
+const URL = `/api/v1/players`;
+const { landingPage, detailPage } = require("../controller/player");
+router.get(`${URL}/landingpage`, landingPage);
+router.get(`${URL}/:id/detail`, detailPage);
+// END PLAYERS [API] =======================================================
 
 // START USERS =====================================================
 const { viewSignIn, actionSignin, actionSignout, indexPlayer, viewDetailPlayer } = require("../controller/user");
