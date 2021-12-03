@@ -75,7 +75,7 @@ module.exports = {
         src.pipe(dest);
         src.on("end", async () => {
           try {
-            const voucher = await new Voucher({
+            const voucher = new Voucher({
               name,
               category,
               nominals,

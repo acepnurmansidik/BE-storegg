@@ -8,13 +8,16 @@ const session = require("express-session");
 const flash = require("connect-flash");
 
 const userRouter = require("./app/users/router");
-const bankRouter = require("./app/bank/router")
-const categoryRouter = require("./app/category/router")
-const dashboardRouter = require("./app/dashboard/router")
-const nominalRouter = require("./app/nominal/router")
-const paymentsRouter = require("./app/payments/router")
-const transactionRouter = require("./app/transaction/router")
-const voucherRouter = require("./app/voucher/router")
+const bankRouter = require("./app/bank/router");
+const categoryRouter = require("./app/category/router");
+const dashboardRouter = require("./app/dashboard/router");
+const nominalRouter = require("./app/nominal/router");
+const paymentsRouter = require("./app/payments/router");
+const transactionRouter = require("./app/transaction/router");
+const voucherRouter = require("./app/voucher/router");
+
+const playersRouter = require("./app/player/router");
+const authRouter = require("./app/auth/router");
 
 const app = express();
 const URL = `/api/v1`;
@@ -44,6 +47,11 @@ app.use(
   "/adminlte",
   express.static(path.join(__dirname, "/node_modules/admin-lte"))
 );
+
+// API ===================================================================
+app.use(`${URL}/players`, playersRouter);
+app.use(`${URL}/auth`, authRouter);
+// END API ===============================================================
 
 app.use(userRouter);
 app.use(bankRouter);
