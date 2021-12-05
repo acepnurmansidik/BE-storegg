@@ -5,7 +5,7 @@ let bankSchema = mongoose.Schema({
     type: String,
     require: [true, "The name of the bank owner cannot be empty"],
   },
-  nameBank: {
+  bankName: {
     type: String,
     require: [true, "Bank name is required"],
   },

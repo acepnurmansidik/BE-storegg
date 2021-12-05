@@ -80,6 +80,7 @@ module.exports = {
               category,
               nominals,
               thumbnail: filename,
+              user: req.session.user.id,
             });
 
             await voucher.save();
@@ -94,7 +95,12 @@ module.exports = {
           }
         });
       } else {
-        const voucher = await new Voucher({ name, category, nominals });
+        const voucher = await new Voucher({
+          name,
+          category,
+          nominals,
+          user: req.session.user.id,
+        });
 
         await voucher.save();
 
