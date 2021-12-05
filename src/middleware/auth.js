@@ -1,6 +1,6 @@
 const config = require("../../config");
-const jwt=require("jsonwebtoken")
-const Player = require("../../app/player/model")
+const jwt = require("jsonwebtoken");
+const Player = require("../../app/player/model");
 
 module.exports = {
   isLogin: async (req, res, next) => {
@@ -22,15 +22,15 @@ module.exports = {
         : null;
       const data = jwt.verify(token, config.jwtKey);
 
-      const player = await Player.findOne({_id: data.player.id})
+      const player = await Player.findOne({ _id: data.player.id });
 
-      if(!player){
-        throw new Error()
+      if (!player) {
+        throw new Error();
       }
       // send data & token to request
-      req.player = data
-      req.token = token
-      next()
+      req.player = player;
+      req.token = token;
+      next();
     } catch (err) {
       res.status(401).json({ error: "Not authorized to access this resource" });
     }

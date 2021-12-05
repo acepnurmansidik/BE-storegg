@@ -31,7 +31,7 @@ module.exports = {
       const category = await Category.find();
       res.status(200).json({ data: category });
     } catch (err) {
-      es.status(500).json({ message: err.message || `Internal server error` });
+      res.status(500).json({ message: err.message || `Internal server error` });
     }
   },
   checkoutPage: async (req, res) => {
@@ -54,7 +54,7 @@ module.exports = {
         return res.status(404).json({ message: "Nominal not found!" });
 
       // payment
-      const res_payment = await Payment.findOne({ _id: payment })
+      const res_payment = await Payment.findOne({ _id: payment });
       if (!res_payment)
         return res.status(404).json({ message: "Payment not found!" });
 
@@ -62,7 +62,7 @@ module.exports = {
       const res_bank = await Bank.findOne({ _id: bank });
       if (!res_bank)
         return res.status(404).json({ message: "Bank not found!" });
-      
+
       let tax = (10 / 100) * res_nominal._doc.price;
       let value = res_nominal._doc.price + tax;
 
@@ -91,17 +91,60 @@ module.exports = {
         name: name,
         accountUser: accountUser,
         value: value,
-        player: req.player.player.id,
+        player: req.player._id,
         category: res_voucher._doc.category?._id,
         user: res_voucher._doc.user?._id,
       };
 
       let transaction = new Transaction(payload);
-      await transaction.save()
+      await transaction.save();
 
       res.status(201).json({ data: transaction });
     } catch (err) {
       res.status(500).json({ message: err.message || `Internal server error` });
+    }
+  },
+  historyPage: async (req, res) => {
+    try {
+      const { status = "" } = req.query;
+      let criteria = {};
+
+      // for filtering
+      if (status.length) {
+        criteria = {
+          ...criteria,
+          status: { $regex: `${status}`, $options: "i" },
+        };
+      }
+
+      // for searching player spesific
+      if (req.player._id) {
+        criteria = {
+          ...criteria,
+          player: req.player._id,
+        };
+      }
+
+      const history = await Transaction.find(criteria);
+
+      let total = await Transaction.aggregate([
+        { $match: criteria },
+        {
+          $group: {
+            _id: null,
+            value: { $sum: "$value" },
+          },
+        },
+      ]);
+
+      res.status(200).json({
+        data: history,
+        total: total.length ? total[0].value : 0,
+      });
+
+      // console.log(req.player.player.id);
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internel server error` });
     }
   },
 };
