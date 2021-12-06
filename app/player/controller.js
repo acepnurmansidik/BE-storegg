@@ -1,11 +1,14 @@
 const path = require("path");
 const fs = require("fs");
+const config = require("../../config");
 const Voucher = require("../voucher/model");
 const Nominal = require("../nominal/model");
 const Category = require("../category/model");
 const Payment = require("../payments/model");
 const Bank = require("../bank/model");
 const Transaction = require("../transaction/model");
+const Player = require("./model");
+const { nextTick } = require("process");
 
 module.exports = {
   landingPage: async (req, res) => {
@@ -205,6 +208,89 @@ module.exports = {
       res.status(200).json({ data: player });
     } catch (err) {
       res.status(500).json({ message: err.message || "Internal server error" });
+    }
+  },
+  updateProfilePage: async (req, res, next) => {
+    try {
+      const { name = "", phoneNumber = "" } = req.body;
+
+      const payload = {};
+
+      if (name.length) payload.name = name;
+      if (phoneNumber.length) payload.phoneNumber = phoneNumber;
+
+      if (req.file) {
+        // file to be uploaded
+        let tmp_path = req.file.path;
+        // take file extension
+        let originalExt =
+          req.file.originalname.split(".")[
+            req.file.originalname.split(".").length - 1
+          ];
+        // concatenate filename with originalExt
+        let filename = req.file.filename + "." + originalExt;
+        //  save to destination file
+        let target_path = path.resolve(
+          config.rootPath,
+          `public/uploads/profile/${filename}`
+        );
+
+        // file to be uploaded
+        const src = fs.createReadStream(tmp_path);
+        //  save file
+        const dest = fs.createWriteStream(target_path);
+
+        src.pipe(dest);
+        src.on("end", async () => {
+          let player = await Player.findOne({ _id: req.player._id });
+
+          let currentImage = `${config.rootPath}/public/uploads/profile/${player.avatar}`;
+          // check if there is a picture
+          if (fs.existsSync(currentImage)) {
+            // delete image
+            fs.unlinkSync(currentImage);
+          }
+
+          player = await Player.findOneAndUpdate(
+            { _id: req.player._id },
+            { ...payload, avatar: filename },
+            { new: true, runValidators: true }
+          );
+
+        res.status(201).json({
+          data: {
+            id: player.id,
+            name: player.name,
+            phoneNumber: player.phoneNumber,
+            avatar: player.avatar,
+          },
+        });
+        });
+      } else {
+        const player = await Player.findOneAndUpdate(
+          { _id: req.player._id },
+          payload,
+          { new: true, runValidators: true }
+        );
+
+        res.status(201).json({
+          data: {
+            id: player.id,
+            name: player.name,
+            phoneNumber: player.phoneNumber,
+            avatar: player.avatar,
+          },
+        });
+      }
+    } catch (err) {
+      if(err&err.name === "ValidationError"){
+        res.status(422).json({
+          error: 1,
+          message: err.message,
+          fields: err.errors
+        })
+      }
+      next(err)
     }
   },
 };

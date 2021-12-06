@@ -23,7 +23,7 @@ module.exports = {
         //  save to destination file
         let target_path = path.resolve(
           config.rootPath,
-          `public/uploads/${filename}`
+          `public/uploads/profile/${filename}`
         );
 
         const player = new Player({ ...payload, avatar: filename });
