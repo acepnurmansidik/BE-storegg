@@ -1,5 +1,5 @@
 const express = require("express");
-const { landingPage, categoryPage, detailPage, historyPage, checkoutPage, historyDetailPage, dashboard } = require("./controller");
+const { landingPage, categoryPage, detailPage, historyPage, checkoutPage, historyDetailPage, dashboard, profilePage } = require("./controller");
 const router = express.Router();
 const {playerAuthorization}=require("../../src/middleware/auth")
 
@@ -10,5 +10,6 @@ router.post("/checkout",playerAuthorization, checkoutPage);
 router.get("/history", playerAuthorization, historyPage);
 router.get("/history/:id/detail", playerAuthorization, historyDetailPage);
 router.get("/dashboard", playerAuthorization, dashboard);
+router.get("/profile", playerAuthorization, profilePage);
 
 module.exports = router;

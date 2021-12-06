@@ -1,3 +1,5 @@
+const path = require("path");
+const fs = require("fs");
 const Voucher = require("../voucher/model");
 const Nominal = require("../nominal/model");
 const Category = require("../category/model");
@@ -187,6 +189,20 @@ module.exports = {
         .sort({ createdAt: -1 });
 
       res.status(200).json({ data: history, counts });
+    } catch (err) {
+      res.status(500).json({ message: err.message || "Internal server error" });
+    }
+  },
+  profilePage: async (req, res) => {
+    try {
+      const player = {
+        id: req.player._id,
+        email: req.player.email,
+        phoneNumber: req.player.phoneNumber,
+        password: req.player.password,
+        avatar: req.player.avatar,
+      };
+      res.status(200).json({ data: player });
     } catch (err) {
       res.status(500).json({ message: err.message || "Internal server error" });
     }
