@@ -25,8 +25,15 @@ module.exports = {
   detailPage: async (req, res) => {
     try {
       const { id } = req.params;
-      const voucher = await Voucher.findOne({ _id: id });
-      res.status(200).json({ data: voucher });
+      const voucher = await Voucher.findOne({ _id: id })
+        .select("_id name category status thumbnail nominals")
+        .populate("category", "name")
+        .populate("nominals")
+        .populate("user", "_id name phoneNumber");
+
+      const payments = await Payment.find().populate("banks");
+
+      res.status(200).json({ data: { detail: voucher, payments: payments } });
     } catch (err) {
       res.status(500).json({ message: err.message || `Internal server error` });
     }
@@ -257,14 +264,14 @@ module.exports = {
             { new: true, runValidators: true }
           );
 
-        res.status(201).json({
-          data: {
-            id: player.id,
-            name: player.name,
-            phoneNumber: player.phoneNumber,
-            avatar: player.avatar,
-          },
-        });
+          res.status(201).json({
+            data: {
+              id: player.id,
+              name: player.name,
+              phoneNumber: player.phoneNumber,
+              avatar: player.avatar,
+            },
+          });
         });
       } else {
         const player = await Player.findOneAndUpdate(
@@ -283,14 +290,14 @@ module.exports = {
         });
       }
     } catch (err) {
-      if(err&err.name === "ValidationError"){
+      if (err & (err.name === "ValidationError")) {
         res.status(422).json({
           error: 1,
           message: err.message,
-          fields: err.errors
-        })
+          fields: err.errors,
+        });
       }
-      next(err)
+      next(err);
     }
   },
 };
