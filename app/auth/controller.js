@@ -35,8 +35,20 @@ module.exports = {
         //  save file
         const dest = fs.createWriteStream(target_path);
         src.pipe(dest);
-
-        res.status(201).json({ message: player });
+        src.on("end", () => {
+          try {
+            res.status(201).json({ message: player });
+          } catch (err) {
+            if (err && err.name === "ValidationError") {
+              return res.status(422).json({
+                error: 1,
+                message: err.message,
+                fields: err.errors,
+              });
+            }
+            next(err);
+          }
+        });
       } else {
         let player = new Player(payload);
         await player.save();
@@ -44,7 +56,7 @@ module.exports = {
         res.status(201).json({ message: player });
       }
     } catch (err) {
-      if (err & (err.name === "ValidationError")) {
+      if (err && err.name === "ValidationError") {
         return res.status(422).json({
           error: 1,
           message: err.message,
