@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { isEmail } = require("validator");
 
 const bcrypt = require("bcryptjs");
 const HASH_ROUND = 12;
@@ -64,6 +65,9 @@ playerSchema.path("email").validate(
 
 // before saving do validation
 playerSchema.pre("save", function (next) {
+  if (!isEmail(this.email)) {
+    throw new Error("Invalid email!");
+  }
   this.password = bcrypt.hashSync(this.password, HASH_ROUND);
   next();
 });
