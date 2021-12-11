@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 let nominalSchema = mongoose.Schema({
   coinName: {
     type: String,
-    require: [true, "Nominal name is required"],
+    require: [true, "Nominal name cannot be empty!"],
   },
   coinQuantity: {
     type: Number,

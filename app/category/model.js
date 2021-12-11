@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 let categorySchema = mongoose.Schema({
   name: {
     type: String,
-    require: [true, "Category name is required"],
+    require: [true, "Category name cannot be empty!"],
   },
 });
 

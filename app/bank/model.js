@@ -7,11 +7,11 @@ let bankSchema = mongoose.Schema({
   },
   bankName: {
     type: String,
-    require: [true, "Bank name is required"],
+    require: [true, "Bank name cannot be empty!"],
   },
   noRekening: {
     type: String,
-    require: [true, "Account number is required"],
+    require: [true, "Account number cannot be empty!"],
   },
 });
 

@@ -7,24 +7,24 @@ const HASH_ROUND = 12;
 let playerSchema = mongoose.Schema({
   email: {
     type: String,
-    require: [true, "email harus diisi"],
+    require: [true, "Email cannot be empty!"],
   },
   name: {
     type: String,
     require: [true, "nama harus diisi"],
-    maxlength: [225, "panjang nama harus antara 3 - 225 karakter"],
-    minlength: [3, "panjang nama harus antara 3 - 225 karakter"],
+    maxlength: [225, "Maximum name length between 3-255 characters!"],
+    minlength: [3, "Minimum name length between 3-255 characters!"],
   },
   username: {
     type: String,
     require: [true, "nama harus diisi"],
-    maxlength: [225, "panjang username harus antara 3 - 225 karakter"],
-    minlength: [3, "panjang username harus antara 3 - 225 karakter"],
+    maxlength: [225, "Maximum username length between 3-255 characters!"],
+    minlength: [3, "Minimum username length between 3-255 characters!"],
   },
   password: {
     type: String,
-    require: [true, "kata sandi harus diisi"],
-    maxlength: [225, "panjang password maksimal 225 karakter"],
+    require: [true, "Password cannot be empty!"],
+    maxlength: [225, "Maximum password length 255 characters!"],
   },
   role: {
     type: String,
@@ -40,9 +40,9 @@ let playerSchema = mongoose.Schema({
   fileName: { type: String },
   phoneNumber: {
     type: String,
-    require: [true, "nomor telpon harus diisi"],
-    maxlength: [13, "panjang nomor telpon harus antara 9 - 13 karakter"],
-    minlength: [9, "panjang nomor telpon harus antara 9 - 13 karakter"],
+    require: [true, "Phone number cannot be empty!"],
+    maxlength: [13, "Maximum length of phone number is 3 - 13 characters!"],
+    minlength: [9, "Minimum length of phone number is 3 - 13 characters!"],
   },
 
   favorite: {

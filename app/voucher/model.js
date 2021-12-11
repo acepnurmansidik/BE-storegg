@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 let voucherSchema = mongoose.Schema({
   name: {
     type: String,
-    require: [true, "Game name is required"],
+    require: [true, "Game name cannot be empty!"],
   },
   status: {
     type: String,

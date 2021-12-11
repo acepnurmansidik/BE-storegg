@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 let paymentSchema = mongoose.Schema({
   type: {
     type: String,
-    require: [true, "Type payment is required"],
+    require: [true, "Type payment cannot be empty!"],
   },
   status: {
     type: String,
