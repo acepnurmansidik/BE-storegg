@@ -198,7 +198,12 @@ module.exports = {
         .populate("category")
         .sort({ createdAt: -1 });
 
-      res.status(200).json({ data: history, counts });
+      res.status(200).json({
+        data: {
+          history,
+          counts,
+        },
+      });
     } catch (err) {
       res.status(500).json({ message: err.message || "Internal server error" });
     }
